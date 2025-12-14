@@ -1,0 +1,25 @@
+leetcode question-2404
+
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer,Integer> map = new HashMap();
+        for(int i=0;i<n;i++){
+            if(nums[i]%2==0){
+                map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+            }
+        }
+
+        int result =-1;
+        int maxFreq=0;
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            int number = entry.getKey();
+            int freq = entry.getValue();
+            if(maxFreq<freq || maxFreq==freq && number<result){
+                maxFreq=freq;
+                result=number;
+            }
+        }
+        return result;
+    }
+}
