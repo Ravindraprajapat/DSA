@@ -1,0 +1,148 @@
+📘 String & StringBuilder – Important Methods + Interview Notes (Java | DSA)
+🔹 PART 1: String – Important Methods
+🔸 Basic Methods
+
+length() → string length
+
+charAt(int index) → character access
+
+substring(int begin)
+
+substring(int begin, int end)
+
+toCharArray() → char array conversion
+
+🔸 Comparison Methods (Very Important)
+
+equals(Object obj) → content compare
+
+equalsIgnoreCase(String s)
+
+compareTo(String s) → lexicographical
+
+compareToIgnoreCase(String s)
+
+📌 Interview Tip:
+❌ == use mat karo, reference compare hota hai
+
+🔸 Searching Methods
+
+indexOf(char / String)
+
+lastIndexOf(char / String)
+
+contains(CharSequence s)
+
+startsWith(String s)
+
+endsWith(String s)
+
+🔸 Modification (Returns NEW String)
+
+⚠️ String immutable hoti hai
+
+toLowerCase()
+
+toUpperCase()
+
+trim()
+
+replace(char, char)
+
+replace(String, String)
+
+replaceAll(regex, replacement)
+
+🔸 Conversion Methods
+
+valueOf(int / char / boolean)
+
+split(String regex)
+
+join(CharSequence delimiter, CharSequence...)
+
+🔸 Utility Methods
+
+isEmpty()
+
+isBlank() (Java 11+)
+
+matches(String regex)
+
+intern()
+
+🔹 PART 2: StringBuilder – Important Methods (DSA Focused)
+🔸 Creation
+StringBuilder sb = new StringBuilder();
+StringBuilder sb = new StringBuilder("abc");
+
+🔸 Modification Methods (Most Used)
+
+append(value)
+
+insert(index, value)
+
+delete(start, end)
+
+deleteCharAt(index)
+
+setCharAt(index, char)
+
+reverse()
+
+🔸 Info Methods
+
+length()
+
+capacity()
+
+🔸 Conversion
+
+toString() → String me convert
+
+🔹 PART 3: String vs StringBuilder (Interview Gold)
+Feature	String	StringBuilder
+Mutability	❌ Immutable	✅ Mutable
+Speed	Slow	Fast
+Thread Safe	Yes	No
+Loop Usage	❌ Avoid	✅ Preferred
+DSA	❌	✅
+🔹 PART 4: Time Complexity (Must Remember)
+String
+
+charAt() → O(1)
+
+substring() → O(n)
+
+equals() → O(n)
+
++ in loop → ❌ O(n²)
+
+StringBuilder
+
+append() → O(1) amortized
+
+insert() → O(n)
+
+delete() → O(n)
+
+reverse() → O(n)
+
+🔹 PART 5: Interview One-Liners (VERY IMPORTANT)
+
+String is immutable, StringBuilder is mutable
+
+Avoid String concatenation inside loops
+
+Use StringBuilder for building strings
+
+== compares reference, equals() compares content
+
+String literals are stored in SCP
+
+🔹 PART 6: Common Interview Traps
+
+❌ Using String + inside loop
+❌ Using == for string comparison
+❌ Forgetting toString() after StringBuilder
+❌ Ignoring substring cost
