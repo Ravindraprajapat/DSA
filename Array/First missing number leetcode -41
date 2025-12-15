@@ -1,0 +1,87 @@
+code:-
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+         for(int i=0;i<n;i++){
+            while(nums[i]>0 && nums[i]<=n && nums[i]!=nums[nums[i]-1]){
+                int temp = nums[i];
+                nums[i] = nums[temp-1];
+                nums[temp-1]=temp;
+            }
+         }
+         for(int i=0;i<n;i++){
+            if(nums[i]!=i+1) return i+1;
+         }
+         return n+1;
+    }
+}
+========================================================================================================================================================
+
+Time Complexity - O(n)
+Space Complexity -O(1) 
+
+
+==========================================================================================================================================================
+First Missing Positive – for vs while (Revision Notes)
+🧠 Problem Context
+
+First Missing Positive problem me hume array ko in-place rearrange karna hota hai taaki
+number x → index x-1 par ho.
+
+🔑 Key Observation
+
+Swap ke baad same index par naya element aata hai
+
+Naya element bhi valid ho sakta hai (1 to n)
+
+Ek index par multiple swaps possible hote hain
+
+❓ while loop kyun use hota hai?
+
+while loop ka use tab hota hai jab ek index ko tab tak process karna ho jab tak wo completely correct na ho jaye.
+
+Conditions:
+while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i]-1])
+
+Reason:
+
+Swap ke baad nums[i] change ho jata hai
+
+Same index par aaya hua element bhi correct position chahta hai
+
+Isliye re-check zaroori hota hai
+
+❌ if kyun sufficient nahi hai?
+
+if sirf ek baar check karta hai
+
+Swap ke baad index ka kaam incomplete reh sakta hai
+
+for loop aage badh jata hai aur index fully fix nahi hota
+
+🧠 External for loop ka role
+
+for loop array ke har index par jaane ke liye hota hai
+
+Ensures every index is visited
+
+Index traversal ka kaam karta hai
+
+Index ko fix nahi karta
+
+🧠 Internal while loop ka role
+
+while loop current index ko completely fix karta hai
+
+Same index par multiple swaps allow karta hai
+
+Jab tak element sahi jagah par na aa jaye, loop nahi rukta
+
+🔁 for vs while (Clear Difference)
+Loop	Purpose
+for	Har index par visit karna
+while	Same index ko sahi position tak fix karna
+🧩 Decision Rule (Very Important)
+
+Agar swap ke baad SAME index par naya element aata hai
+aur usse bhi process karna padta hai → while mandatory hai
