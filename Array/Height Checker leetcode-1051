@@ -1,0 +1,40 @@
+code:-
+class Solution {
+    public int heightChecker(int[] heights) {
+        int n = heights.length;
+        int[] clone = new int[n];
+        int count =0;
+        for(int i=0;i<n;i++){
+            clone[i]=heights[i];
+        }
+        Arrays.sort(clone);
+         for(int i=0;i<n;i++){
+            if(clone[i]!=heights[i]){
+                count++;
+            }
+            
+        }
+        return count;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+intition:-
+🧠 Pattern (Core Idea)
+
+Expected order = heights ka sorted version (non-decreasing order).
+
+Original array (heights) aur sorted array (expected) ko
+index-by-index compare karo.
+
+Jaha value different ho → count +1.
+
+Bas ✨
