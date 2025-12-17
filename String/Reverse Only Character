@@ -1,0 +1,27 @@
+class Solution {
+    public void swap(char[] ch , int st , int ed ){
+        char temp = ch[st];
+        ch[st]=ch[ed];
+        ch[ed]=temp;
+    }
+    public String reverseOnlyLetters(String s) {
+        char[] ch = s.toCharArray();
+        int i=0;
+        int j=ch.length-1;
+        while(i<j){
+            if(!Character.isLetter(ch[i])){
+                 i++;
+                  continue;}
+            if(!Character.isLetter(ch[j])){
+
+            j--;
+             continue;}
+            swap(ch,i,j);
+            i++;
+            j--;
+        }
+        
+       
+        return new String(ch);
+    }
+}
