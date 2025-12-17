@@ -1,0 +1,144 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        int i = a.length()-1;
+        int j = b.length()-1;
+        int carry =0;
+        StringBuilder sb = new StringBuilder();
+        while(i>=0 || j>=0 || carry==1){
+            int bit1 = i>=0?a.charAt(i)-'0':0;
+            int bit2 = j>=0?b.charAt(j)-'0':0;
+            int sum = bit1+bit2+carry;
+            sb.append(sum%2);
+            carry=sum/2;
+            i--;
+            j--;
+        }
+        String res = sb.reverse().toString();
+         i=0;
+         int n = res.length();
+        while(i<n && res.charAt(i)=='0'){
+            i++;
+        }
+        if(i>0) res = res.substring(i);
+        return res;
+    }
+}
+
+
+
+
+1️⃣ Problem
+
+Do binary strings a aur b diye hote hain
+
+Inka binary addition karke result binary string return karna hota hai
+
+2️⃣ Right to Left Addition
+
+Binary addition hamesha right se left hota hai
+
+Isliye:
+
+i = a.length() - 1
+
+j = b.length() - 1
+
+3️⃣ Carry Variable
+
+carry integer use hota hai
+
+Binary addition me:
+
+1 + 1 = 10 → 0 store, 1 carry
+
+4️⃣ StringBuilder Use
+
+Result ko reverse order me store kiya jata hai
+
+StringBuilder fast hota hai string concatenation ke liye
+
+5️⃣ While Loop Condition
+while (i >= 0 || j >= 0 || carry == 1)
+
+
+Loop tab tak chale jab:
+
+a ke bits bache ho
+
+b ke bits bache ho
+
+ya last me carry bacha ho
+
+6️⃣ Bit Extraction
+int bit1 = i >= 0 ? a.charAt(i) - '0' : 0;
+int bit2 = j >= 0 ? b.charAt(j) - '0' : 0;
+
+
+Character '0' / '1' ko integer 0 / 1 me convert karte hain
+
+Agar index negative ho → 0 assume
+
+7️⃣ Sum Calculation
+int sum = bit1 + bit2 + carry;
+
+
+Teen cheeze add hoti hain:
+
+Current bit of a
+
+Current bit of b
+
+Previous carry
+
+8️⃣ Current Bit Store
+sb.append(sum % 2);
+
+
+sum % 2 → current binary digit
+
+Example:
+
+2 % 2 = 0
+
+3 % 2 = 1
+
+9️⃣ Carry Update
+carry = sum / 2;
+
+
+sum / 2 → next carry
+
+Example:
+
+2 / 2 = 1
+
+1 / 2 = 0
+
+🔟 Move to Next Bits
+i--;
+j--;
+
+
+Next left position par shift
+
+1️⃣1️⃣ Reverse Result
+String res = sb.reverse().toString();
+
+
+Result reverse order me bana tha
+
+Isliye final answer ke liye reverse zaroori
+
+1️⃣2️⃣ Leading Zero Removal
+
+Extra safety ke liye starting ke 0 remove karte hain
+
+Example:
+
+"000101" → "101"
+
+1️⃣3️⃣ Return Answer
+return res;
+
+
+Final binary sum return
