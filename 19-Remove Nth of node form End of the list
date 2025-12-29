@@ -1,0 +1,77 @@
+class Solution {
+     
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next=head;
+       ListNode fast = dummyNode;
+       ListNode slow = dummyNode;
+       for(int i=0;i<n;i++){
+        fast=fast.next;
+       }
+       while(fast.next!=null){
+        slow=slow.next;
+        fast=fast.next;
+       }
+       slow.next = slow.next.next;
+       return dummyNode.next;
+    }
+}
+
+// class Solution {
+//      public ListNode getNode(int index , ListNode head){
+//        ListNode temp = head;
+//         for (int i = 1; i < index ; i++) {
+//             temp=temp.next;
+//         }
+//         return temp;
+//     }
+//     public int getSize (ListNode head){
+//         int size =0;
+//         ListNode temp = head;
+//         while(temp!=null){
+//             size++;
+//             temp=temp.next;
+//         }
+//         return size;
+//     }
+//     public ListNode removeNthFromEnd(ListNode head, int n) {
+//         int size = getSize(head);
+//         if(size==n) return head.next;
+//         ListNode prev = getNode(size-n,head);
+//         prev.next=prev.next.next;
+//         return head;
+//     }
+// }
+
+Remove Nth Node From End of Linked List
+(Gap Pattern + Dummy Node)
+📌 Problem Statement
+
+Singly Linked List di hui hai
+
+End se nth node delete karni hai
+
+Single traversal (one pass) me solve karna hai
+
+🧠 Core Idea (Gap Pattern)
+
+Do pointers use karte hain: fast & slow
+
+fast ko n steps aage move karte hain
+
+slow wahi rehta hai
+
+Dono ko saath-saath move karte hain
+
+Jab fast last node par hota hai →
+slow delete hone wali node ke just pehle hota hai
+
+🤖 Why Dummy Node?
+
+Head node delete hone ka edge case handle hota hai
+
+Head bhi normal node ban jata hai
+
+Extra if-else conditions avoid hoti hain
+
+Code clean aur uniform rehta hai
