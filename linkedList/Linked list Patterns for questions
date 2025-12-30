@@ -1,0 +1,280 @@
+🔗 Linked List — ALL DSA PATTERNS (With Problems)
+🎯 How Interviewers Think?
+
+Linked List = Pointer manipulation + traversal control
+Isliye questions patterns me repeat hote hain.
+
+🔁 Pattern 1: Simple Traversal Pattern
+
+Idea: Node-by-node move karo using temp pointer
+
+🔹 Used In:
+
+Print linked list
+
+Count nodes
+
+Search an element
+
+Find length
+
+Node temp = head;
+while(temp != null){
+    temp = temp.next;
+}
+
+
+⏱ Time: O(n)
+📦 Space: O(1)
+
+🔄 Pattern 2: Reversal Pattern (3-Pointer)
+
+Idea: Direction of next pointer reverse karo
+
+🔹 Used In:
+
+Reverse linked list
+
+Reverse sublist
+
+Reverse in k-groups
+
+Palindrome linked list
+
+Node prev = null;
+Node curr = head;
+
+while(curr != null){
+    Node next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+}
+head = prev;
+
+
+📌 Golden Pattern ⭐
+⏱ Time: O(n) | Space: O(1)
+
+🐢🐇 Pattern 3: Slow–Fast Pointer (Tortoise–Hare)
+
+Idea: Ek pointer 1 step, dusra 2 steps
+
+🔹 Used In:
+
+Find middle of linked list
+
+Detect cycle
+
+Remove cycle
+
+Check palindrome
+
+Happy number (LL type logic)
+
+slow = fast = head;
+while(fast != null && fast.next != null){
+    slow = slow.next;
+    fast = fast.next.next;
+}
+
+
+⏱ Time: O(n)
+📦 Space: O(1)
+
+🔁 Pattern 4: Cycle Detection Pattern
+
+Algorithm: Floyd’s Cycle Detection
+
+🔹 Used In:
+
+Detect loop
+
+Find start of loop
+
+Remove loop
+
+while(fast != null && fast.next != null){
+    slow = slow.next;
+    fast = fast.next.next;
+    if(slow == fast) return true;
+}
+
+
+📌 Interview Favourite
+
+🔙 Pattern 5: Nth Node from End (Gap Pattern)
+
+Idea: Two pointers ke beech n ka gap maintain karo
+
+🔹 Used In:
+
+Remove nth node from end
+
+Find nth node from end
+
+fast = slow = head;
+for(int i=0;i<n;i++) fast = fast.next;
+
+while(fast != null){
+    slow = slow.next;
+    fast = fast.next;
+}
+
+
+⏱ Time: O(n)
+
+🔗 Pattern 6: Merge Two Linked Lists
+
+Idea: Dummy node + comparison
+
+🔹 Used In:
+
+Merge two sorted lists
+
+Merge k sorted lists
+
+Sort linked list
+
+Node dummy = new Node(-1);
+Node curr = dummy;
+
+while(l1 != null && l2 != null){
+    if(l1.data < l2.data){
+        curr.next = l1;
+        l1 = l1.next;
+    } else {
+        curr.next = l2;
+        l2 = l2.next;
+    }
+    curr = curr.next;
+}
+
+
+📌 Dummy Node = Cleaner code
+
+✂️ Pattern 7: Partition / Segregation
+
+Idea: Multiple linked lists banao, baad me connect karo
+
+🔹 Used In:
+
+Odd-Even linked list
+
+Segregate 0s,1s,2s
+
+Partition list around value
+
+odd.next = evenHead;
+
+
+⏱ Time: O(n)
+
+🧩 Pattern 8: Dummy Node Pattern
+
+Idea: Edge cases (head deletion) easy ho jaate hain
+
+🔹 Used In:
+
+Delete node
+
+Remove duplicates
+
+Insert at position
+
+Node dummy = new Node(0);
+dummy.next = head;
+
+
+📌 Interview Safe Pattern
+
+🔍 Pattern 9: Hashing Pattern
+
+Idea: Visited nodes track karo
+
+🔹 Used In:
+
+Detect cycle (alternative)
+
+Intersection of linked lists
+
+HashSet<Node> set = new HashSet<>();
+
+
+⏱ Time: O(n)
+📦 Space: O(n)
+
+🔗 Pattern 10: Intersection Pattern
+
+Idea: Length equalize ya pointer swap
+
+🔹 Used In:
+
+Find intersection point of two LL
+
+while(p1 != p2){
+    p1 = (p1 == null) ? headB : p1.next;
+    p2 = (p2 == null) ? headA : p2.next;
+}
+
+
+📌 Brilliant trick
+
+🪜 Pattern 11: Recursive Pattern
+
+Idea: Head solve karo, baaki recursion sambhal lega
+
+🔹 Used In:
+
+Reverse linked list (recursive)
+
+Print reverse
+
+Node newHead = reverse(head.next);
+head.next.next = head;
+head.next = null;
+
+
+📦 Space: O(n) (stack)
+
+🧠 Pattern 12: Palindrome Pattern
+
+Steps:
+
+Find middle
+
+Reverse second half
+
+Compare both halves
+
+📌 Combines:
+
+Slow–fast
+
+Reverse
+
+Traversal
+
+🧱 Pattern 13: K-Group Pattern
+
+Idea: Har k nodes ko reverse karo
+
+🔹 Used In:
+
+Reverse nodes in k-group
+
+📌 Advanced + High-paying interviews
+
+📊 Pattern Summary Table
+Pattern	Core Use
+Traversal	Basic operations
+Reverse	Direction change
+Slow-Fast	Middle, cycle
+Gap	Nth from end
+Dummy Node	Clean edge handling
+Merge	Sorting
+Partition	Reordering
+Hashing	Extra memory solution
+Intersection	Shared nodes
+Recursive	Elegant logic
+K-Group	Advanced

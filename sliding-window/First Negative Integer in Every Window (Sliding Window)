@@ -1,0 +1,83 @@
+
+class Solution {
+    static List<Integer> firstNegInt(int arr[], int k) {
+        int n = arr.length;
+        List<Integer> list = new ArrayList<>();
+        Deque<Integer> dq = new LinkedList<>();
+        int i=0,j=0;
+        while(j<n){
+            if(arr[j]<0){
+                dq.addLast(arr[j]);
+            }
+            
+            if(j-i+1 == k){
+                if(!dq.isEmpty()){
+                    list.add(dq.peekFirst());
+                }
+                else{
+                    list.add(0);
+                }
+            
+            if(arr[i]<0 && !dq.isEmpty()){
+                dq.pollFirst();
+            }
+            i++;
+            }
+            j++;
+        }
+        return list;
+    }
+}
+
+
+
+
+🪟 First Negative Integer in Every Window (Sliding Window)
+🔹 Problem Summary
+
+Given an array arr[] and window size k, find the first negative number in every contiguous subarray of size k.
+If a window has no negative number, return 0.
+
+🔹 Approach Used
+
+Sliding Window + Deque
+
+🔹 Why Deque?
+
+Deque allows O(1) insertion and deletion from both ends
+
+Needed to:
+
+Store negative elements
+
+Remove elements when they go out of the window
+
+🔹 Algorithm (Step-by-Step)
+
+Use two pointers:
+
+i → start of window
+
+j → end of window
+
+Traverse array using j
+
+If arr[j] < 0
+
+Add it to deque using addLast()
+
+When window size becomes k (j - i + 1 == k):
+
+If deque is not empty → add peekFirst() to answer list
+
+Else → add 0
+
+Before sliding window:
+
+If arr[i] is negative and equals deque front
+
+Remove it using pollFirst()
+
+Move window forward:
+
+i++, j++
