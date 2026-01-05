@@ -1,0 +1,49 @@
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+
+        if(head==null || head.next==null){
+            return null;
+        }
+
+         ListNode temp=head;
+        Set<ListNode> set = new HashSet<>();
+        ListNode p = null;
+        while(temp!=null){
+            if(!set.contains(temp)){
+                set.add(temp);
+            }
+            else{
+                p=temp;
+                break;
+            }
+            temp=temp.next;
+        }
+        
+        if(p==null){
+            return null;
+        }
+        return p;
+    //      ListNode slow = head;
+    //     ListNode fast = head;
+        
+    // while(fast!=null && fast.next!=null){
+    //         slow=slow.next;
+    //         fast=fast.next.next;
+            
+    //         if(slow==fast){
+    //             break;
+    //         }
+    //     }
+    //     if(slow!=fast){
+    //         return null;
+    //     }
+    //     ListNode p =head;
+        
+    //     while(p!=slow){
+    //         p=p.next;
+    //         slow=slow.next;
+    //     }
+    //     return p;
+        }
+    }
