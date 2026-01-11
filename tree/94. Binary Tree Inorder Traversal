@@ -1,0 +1,22 @@
+
+class Solution {
+
+    List<Integer> ans = new ArrayList<>();
+
+    void print(TreeNode root){
+        if(root == null){
+            return;
+        }
+        print(root.left);
+        ans.add(root.val);
+        print(root.right);
+    
+      }
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+
+        print(root);
+        return ans;
+
+    }
+}
