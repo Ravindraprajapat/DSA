@@ -1,0 +1,42 @@
+
+class Solution {
+
+    int heigth(TreeNode root){
+        if(root == null) return 0;
+       // if(root.left==null && root.right==null) return 0;
+        return 1+Math.max(heigth(root.left),heigth(root.right));
+    }
+
+    void nthlevel(TreeNode root, int n , List<Integer> arr){
+        if(root == null) return;
+        if(n==1) {
+            arr.add(root.val);
+        }
+        nthlevel(root.left,n-1,arr);
+        nthlevel(root.right,n-1,arr);
+    }
+    
+    void nthlevel1(TreeNode root,int n , List<Integer> arr){
+        if(root == null) return;
+        if(n==1) {
+            arr.add(root.val);
+        }
+        nthlevel1(root.right,n-1,arr);
+        nthlevel1(root.left,n-1,arr);
+        
+    }
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+         
+      //  int level = heigth(root)+1;
+         int level = heigth(root);
+         List<List<Integer>> ans = new ArrayList<>();
+         if(root == null) return ans;
+         for(int i=1;i<=level;i++){
+               List<Integer> arr = new ArrayList<>();
+               if(i%2!=0) nthlevel(root,i,arr);
+               else nthlevel1(root,i,arr);
+               ans.add(arr);
+         }
+        return ans;
+    }
+}
