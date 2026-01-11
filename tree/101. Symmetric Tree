@@ -1,0 +1,29 @@
+
+class Solution {
+
+    boolean isSame(TreeNode p , TreeNode q){
+        if(p==null && q==null) return true;
+        if(p==null || q==null) return false;
+        if(p.val!=q.val) return false;
+        return isSame(p.left,q.left) && isSame(p.right,q.right);
+    }
+
+    TreeNode invert(TreeNode root) {
+         if (root == null) return root;
+       
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right=temp;
+       
+        invert(root.left);
+        invert(root.right);
+        return root;
+    }
+
+    public boolean isSymmetric(TreeNode root) {
+     
+     root.left = invert(root.left);
+     return isSame(root.left,root.right);
+
+    }
+}
