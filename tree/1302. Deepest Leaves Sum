@@ -1,0 +1,21 @@
+class Solution {
+    int high=0;
+    int ans=0;
+    void solver(TreeNode root , int level ){
+        if(root == null) return;
+        solver(root.left,level+1);
+        solver(root.right,level+1);
+
+        if(level>high){
+            high=level;
+            ans = root.val;
+        }
+        else if(level == high){
+            ans+=root.val;
+        }
+    }
+    public int deepestLeavesSum(TreeNode root) {
+        solver(root,0);
+        return ans;
+    }
+}
