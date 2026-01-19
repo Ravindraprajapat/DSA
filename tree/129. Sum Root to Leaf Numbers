@@ -1,0 +1,23 @@
+
+class Solution {
+    List<Integer> nums  = new ArrayList<>();
+    void solver(TreeNode root , int n){
+        if(root == null ) return;
+        n = n*10+root.val;
+        if(root.left==null && root.right==null){
+            nums.add(n);
+        }
+        
+        solver(root.left,n);
+        solver(root.right,n);
+    }
+    public int sumNumbers(TreeNode root) {
+       solver(root,0);
+       int ans = 0;
+       for(int num : nums) {
+        System.out.println(num);
+        ans+=num;
+       }
+       return ans;
+    }
+}
