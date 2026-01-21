@@ -1,0 +1,68 @@
+
+class Solution {
+
+    void delete(TreeNode root, int target) {
+        if (root == null)
+            return;
+        if (root.val > target) { // for left tree
+            if (root.left == null)
+                return;
+            if (root.left.val == target) {
+                TreeNode l = root.left;
+                if (l.left == null && l.right == null)
+                    root.left = null;
+                else if (l.left == null || l.right == null) {
+                    if (l.left == null)
+                        root.left = l.right;
+                    else
+                        root.left = l.left;
+                } else {
+                    TreeNode curr = l;
+                    TreeNode pred = curr.left;
+                    while (pred.right != null)
+                        pred = pred.right;
+                    delete(root, pred.val);
+                    pred.left = curr.left;
+                    pred.right = curr.right;
+                    root.left = pred;
+                }
+            }
+
+            else {
+                delete(root.left, target);
+            }
+        } else { // for left right
+            if (root.right == null)
+                return;
+            if (root.right.val == target) {
+                TreeNode l = root.right;
+                if (l.left == null && l.right == null)
+                    root.right = null;
+                else if (l.left == null || l.right == null) {
+                    if (l.left == null)
+                        root.right = l.right;
+                    else
+                        root.right = l.left;
+                } else {
+                    TreeNode curr = l;
+                    TreeNode pred = curr.left;
+                    while (pred.right != null)
+                        pred = pred.right;
+                    delete(root, pred.val);
+                    pred.left = curr.left;
+                    pred.right = curr.right;
+                    root.right = pred;
+                }
+            } else {
+                delete(root.right, target);
+            }
+        }
+    }
+
+    public TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode dummyNode = new TreeNode(Integer.MAX_VALUE);
+        dummyNode.left = root;
+        delete(dummyNode, key);
+        return dummyNode.left;
+    }
+}
