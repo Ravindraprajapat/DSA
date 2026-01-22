@@ -1,0 +1,24 @@
+
+class Solution {
+    int solver(TreeNode root, long k) {
+        if (root == null)
+            return 0;
+        int count = 0;
+        
+        if ((long)root.val == k) {
+            count++;
+        }
+
+        count += solver(root.left, k-(long)root.val);
+        count += solver(root.right, k-(long)root.val);
+        return count;
+    }
+
+    public int pathSum(TreeNode root, int k) {
+        if(root==null) return 0;
+        int count = solver(root, (long)k);
+        count += pathSum(root.left, k);
+        count += pathSum(root.right, k);
+        return count;
+    }
+}
