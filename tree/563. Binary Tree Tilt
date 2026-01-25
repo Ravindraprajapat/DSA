@@ -1,0 +1,20 @@
+class Solution {
+
+    int totalTilt = 0;
+
+    public int findTilt(TreeNode root) {
+        subtreeSum(root);
+        return totalTilt;
+    }
+
+    int subtreeSum(TreeNode root) {
+        if (root == null) return 0;
+
+        int leftSum = subtreeSum(root.left);
+        int rightSum = subtreeSum(root.right);
+
+        totalTilt += Math.abs(leftSum - rightSum);
+
+        return leftSum + rightSum + root.val;
+    }
+}
