@@ -1,0 +1,47 @@
+
+
+class Solution {
+    
+    void leftTraverse( Node root, ArrayList<Integer> ans ){
+        if((root == null) || (root.left==null && root.right == null)){
+            return;
+        }
+        
+        ans.add(root.data);
+        if(root.left!=null) leftTraverse(root.left,ans);
+        else  leftTraverse(root.right,ans);
+    }
+    
+    void leafTraverse(Node root, ArrayList<Integer> ans ){
+       if(root == null) return;
+       if(root.left==null && root.right == null) {
+           ans.add(root.data);
+           return;
+       }
+         leafTraverse(root.left,ans);
+         leafTraverse(root.right,ans);
+    }
+    
+    void rightTraverse(Node root, ArrayList<Integer> ans ){
+        if((root == null) || (root.left==null && root.right == null)){
+            return;
+        } 
+        
+        if(root.right!=null) rightTraverse(root.right,ans);
+        else  rightTraverse(root.left,ans);
+        ans.add(root.data);
+    }
+    ArrayList<Integer> boundaryTraversal(Node root) {
+         ArrayList<Integer> ans = new ArrayList<>();
+         if(root == null) return ans;
+         ans.add(root.data);
+         leftTraverse(root.left,ans);
+         
+         leafTraverse(root.left,ans);
+         leafTraverse(root.right,ans);
+         
+         rightTraverse(root.right,ans);
+         return ans;
+         
+    }
+}
