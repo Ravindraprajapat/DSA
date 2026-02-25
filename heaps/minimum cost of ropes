@@ -1,0 +1,19 @@
+class Solution {
+    public static int minCost(int[] arr) {
+       PriorityQueue<Integer> pq = new PriorityQueue<>();
+       int cost=0;
+       for(int num : arr){
+           pq.add(num);
+       }
+      
+       while(pq.size() > 1){
+                int v1 = pq.remove();
+                int v2 = pq.remove();
+                int sum = v1+v2;
+                cost+=sum;
+                 pq.add(sum);
+       }
+       
+       return cost;
+    }
+}
