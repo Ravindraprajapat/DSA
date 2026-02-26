@@ -1,0 +1,28 @@
+class sort implements Comparable<sort> {
+    String num;
+
+    public sort(String num) {
+        this.num = num;
+    }
+
+    public int compareTo(sort s) {
+        if (this.num.length() == s.num.length()) {
+            return this.num.compareTo(s.num);
+        }
+        return this.num.length() - s.num.length();
+    }
+
+}
+
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) {
+        PriorityQueue<sort> pq = new PriorityQueue<>();
+        for (String s : nums) {
+            pq.add(new sort(s));
+            if (pq.size() > k)
+                pq.remove();
+        }
+
+        return pq.peek().num;
+    }
+}
