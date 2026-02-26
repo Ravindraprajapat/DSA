@@ -1,0 +1,48 @@
+class pair implements Comparable<pair> {
+    String str;
+    int frq;
+
+    public pair(String str, int frq) {
+        this.str = str;
+        this.frq = frq;
+    }
+
+    public int compareTo(pair p) {
+        if (this.frq == p.frq)
+            return p.str.compareTo(this.str);
+        return this.frq - p.frq;
+
+        // public int compareTo(pair p) {
+        //     if (this.frq == p.frq)
+        //         return this.str.compareTo(p.str);
+        //     return p.frq - this.frq ;
+        // }
+    }
+}
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        List<String> list = new ArrayList<>();
+        PriorityQueue<pair> pq = new PriorityQueue<>();
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String s : words) {
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
+
+    
+        for (Map.Entry<String, Integer> e : map.entrySet()) {
+            String str = e.getKey();
+            int freq = e.getValue();
+            pq.add(new pair(str, freq));
+            if (pq.size() > k)
+                pq.remove();
+        }
+        while (pq.size() != 0) {
+            pair p = pq.remove();
+            String s = p.str;
+            list.add(s);
+        }
+       Collections.reverse(list);
+        return list;
+    }
+}

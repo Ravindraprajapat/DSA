@@ -1,0 +1,41 @@
+class pair implements Comparable<pair> {
+    int num;
+    int frq;
+
+    public pair(int num, int frq) {
+        this.num = num;
+        this.frq = frq;
+    }
+
+    public int compareTo(pair p) {
+        if (this.frq == p.frq)
+            return this.num - p.num;
+        return this.frq - p.frq;
+    }
+}
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        PriorityQueue<pair> pq = new PriorityQueue<>();
+        int ans[] = new int[k];
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            int num = e.getKey();
+            int freq = e.getValue();
+            pq.add(new pair(num, freq));
+            if (pq.size() > k)
+                pq.remove();
+        }
+        int i=0;
+        while (pq.size() != 0) {
+            pair top = pq.remove();
+            int num = top.num;
+            ans[i++] = num;
+        }
+        return ans;
+    }
+}
