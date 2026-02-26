@@ -1,0 +1,43 @@
+class sort implements Comparable<sort> {
+    int num;
+    int idx;
+
+    public sort(int num, int idx) {
+        this.num = num;
+        this.idx = idx;
+    }
+
+    public int compareTo(sort s) {
+        return this.num - s.num;
+    }
+}
+
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        String[] ans = new String[score.length];
+        PriorityQueue<sort> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i = 0; i < score.length; i++) {
+            pq.add(new sort(score[i], i));
+        }
+        int n = 1;
+        while (pq.size() != 0) {
+            sort top = pq.remove();
+            int num = top.num;
+            if (n == 1) {
+                ans[top.idx] = "Gold Medal";
+                n++;
+            } else if (n == 2) {
+                ans[top.idx] = "Silver Medal";
+                n++;
+            } else if (n == 3) {
+                ans[top.idx] = "Bronze Medal";
+                n++;
+            } else {
+                String s = String.valueOf(n);
+                ans[top.idx] = s;
+                n++;
+            }
+        }
+        return ans;
+    }
+}
