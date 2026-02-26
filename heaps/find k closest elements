@@ -1,0 +1,79 @@
+
+// for leet code 
+
+class pair implements Comparable<pair> {
+    int diff;
+    int num;
+
+    public pair(int diff, int num) {
+        this.diff = diff;
+        this.num = num;
+    }
+
+    public int compareTo(pair p) {
+        if (p.diff == this.diff)
+            return this.num - p.num;
+        return this.diff - p.diff;
+    }
+}
+
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        List<Integer> ans = new ArrayList<>();
+        PriorityQueue<pair> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i = 0; i < arr.length; i++) {
+            int diff = Math.abs(x - arr[i]);
+            pq.add(new pair(diff, arr[i]));
+            if (pq.size() > k)
+                pq.remove();
+        }
+        while (pq.size() != 0) {
+            pair p = pq.remove();
+            ans.add(p.num);
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}
+
+
+// for gfg
+
+class pair implements Comparable<pair> {
+    int diff;
+    int num;
+
+    public pair(int diff, int num) {
+        this.diff = diff;
+        this.num = num;
+    }
+
+    public int compareTo(pair p) {
+        if (p.diff == this.diff)
+            return p.num - this.num;
+        return this.diff - p.diff;
+    }
+}
+
+class Solution {
+    int[] printKClosest(int[] arr, int k, int x) {
+        int ans[] = new int[k];
+     PriorityQueue<pair> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i = 0; i < arr.length; i++) {
+            if(x==arr[i]) continue;
+            int diff = Math.abs(x - arr[i]);
+            pq.add(new pair(diff, arr[i]));
+            if (pq.size() > k)
+                pq.remove();
+        }
+        int i=k-1;
+        while (pq.size() != 0) {
+            pair p = pq.remove();
+            ans[i] = p.num;
+            i--;
+        }
+        // Arrays.sort(ans);
+        return ans;
+        
+    }
+}
