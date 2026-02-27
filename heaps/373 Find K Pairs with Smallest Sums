@@ -1,0 +1,49 @@
+brute force approach
+
+class pair implements Comparable<pair> {
+    int x;
+    int y;
+    int sum ;
+
+    public pair(int x , int y , int sum) {
+        this.x = x;
+        this.y = y;
+        this.sum = sum;
+    }
+
+    public int compareTo(pair p){
+        return this.sum - p.sum;
+    }
+}
+class Solution {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> ans = new ArrayList<>();
+        PriorityQueue<pair> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int n = nums1.length;
+        int m = nums2.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int sum = nums1[i] + nums2[j];
+               
+                if (pq.size() < k){
+                     pq.add(new pair(nums1[i], nums2[j], sum));
+                }
+                else if(pq.peek().sum > sum){
+                    pq.remove();
+                    pq.add(new pair(nums1[i], nums2[j], sum));
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        while (!pq.isEmpty()) {
+            List<Integer> list = new ArrayList<>();
+            pair p = pq.remove();
+            list.add(p.x);
+            list.add(p.y);
+            ans.add(list);
+        }
+        return ans;
+    }
+}
