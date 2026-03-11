@@ -1,0 +1,20 @@
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int n = nums.size();
+        int sum =0;
+        for (int i = 0; i < n; i++) {
+          int c =0;
+          int m = i;
+          while(m>0){
+             if((m&1)==1){
+               c++;
+             }
+             m = m>>1;
+          }
+          if(c==k){
+            sum += nums.get(i);
+          }
+        }
+        return sum;
+    }
+}
