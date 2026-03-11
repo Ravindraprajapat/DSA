@@ -1,0 +1,21 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        // int count = 0;
+        // int result =0;
+        // if(n==0) return 1;
+        // while(n!=0){
+        //     int r = n%2;
+        //     if(r==1) r=0;
+        //     else r=1;
+        //     result+= Math.pow(2,count) * r;
+        //     count++;
+        //     n = n/2;
+        // }
+        // return result;
+        int mask =0;
+        while(mask < n){
+            mask = (mask << 1) | 1;
+        }
+        return mask^n;
+    }
+}
