@@ -1,0 +1,16 @@
+class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int arr[]) {
+       int n = arr.length;
+       int m = 1<<n;
+       ArrayList<ArrayList<Integer>> ans =  new ArrayList<>();
+       
+       for(int i=0;i<m;i++){
+           ArrayList<Integer> l = new ArrayList<>();
+           for(int j=0;j<n;j++){
+               if((i>>j)%2==1) l.add(arr[j]);
+           }
+           ans.add(l);
+       }
+       return ans;
+    }
+}
