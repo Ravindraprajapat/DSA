@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n = rooms.size();
+        boolean isvisited[] = new boolean[n];
+        isvisited[0]=true;
+        Queue<Integer> que = new LinkedList<>();
+        que.add(0);
+        while(que.size() > 0){
+            int front = que.remove();
+            for(int ele : rooms.get(front)){
+                if(!isvisited[ele]){
+                    que.add(ele);
+                    isvisited[ele]=true;
+                }
+            }
+        }
+        for(boolean f : isvisited){
+            if(f==false) return false;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,48 @@
+class Solution {
+
+    void bfs(char ch, boolean isvisited[][], char[][] grid,int i,int j) {
+        int m = grid.length;
+        int n = grid[0].length;
+        Queue<int[]> que = new LinkedList<>();
+        isvisited[i][j] = true;
+        que.add(new int[]{i,j});
+        while(que.size() > 0){
+         int pair[] = que.remove();
+         int r = pair[0];
+         int c = pair[1];
+         if(r > 0 && grid[r-1][c]=='1' && isvisited[r-1][c]==false){ // go up
+            que.add(new int[]{r-1,c});
+            isvisited[r-1][c] = true;
+         }
+         if(c > 0 && grid[r][c-1]=='1' && isvisited[r][c-1]==false){ // go left;
+            que.add(new int[]{r,c-1});
+            isvisited[r][c-1] = true;
+         }
+         if(r < m-1 && grid[r+1][c]=='1' && isvisited[r+1][c]==false){ // go down;
+            que.add(new int[]{r+1,c});
+            isvisited[r+1][c] = true;
+         }
+         if(c < n-1 && grid[r][c+1]=='1' && isvisited[r][c+1]==false){ // go right;
+            que.add(new int[]{r,c+1});
+            isvisited[r][c+1] = true;
+         }
+        }
+    }
+
+    public int numIslands(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        boolean isvisited[][] = new boolean[m][n];
+        int count = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                char ch = grid[i][j];
+                if(ch=='1' && isvisited[i][j]==false){
+                    bfs(ch,isvisited,grid,i,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
