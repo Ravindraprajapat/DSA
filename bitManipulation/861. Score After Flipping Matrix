@@ -1,0 +1,51 @@
+class Solution {
+    public int matrixScore(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+
+        for (int i = 0; i < row; i++) {
+            if (mat[i][0] == 0) { // flip the row 
+                for (int j = 0; j < col; j++) {
+                    mat[i][j] ^= 1;
+                }
+            }
+        }
+
+        for (int j = 0; j < col; j++) {
+            int zero = 0, one = 0;
+            for (int i = 0; i < row; i++) {
+                if (mat[i][j] == 0)
+                    zero++;
+                else
+                    one++;
+            }
+            if (zero > one) {
+                for (int i = 0; i < row; i++) {
+                    mat[i][j] ^= 1;
+                }
+            }
+        }
+        // int sum =0;
+        // int pow = 1;
+        // for (int j = col-1; j >=0; j--) {
+        //    int one=0;
+        //     for (int i = 0; i < row; i++) {
+        //         if(mat[i][j]==1) one++;
+        //     }
+        //     sum += pow * one;
+        //     pow = pow * 2;
+        // }
+        // return sum;
+        
+        int sum = 0;
+         for (int i = 0; i < row; i++) {
+            int num =0;
+                for (int j = 0; j < col; j++) {
+                  num =  num * 2 + mat[i][j];
+                }
+                sum += num;
+            }
+             return sum;
+        }
+        
+    }
