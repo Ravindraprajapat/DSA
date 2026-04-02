@@ -1,0 +1,51 @@
+class Solution {
+     class pair{
+        int vertex;
+        int parent;
+
+        public pair(int vertex , int parent) {
+            this.vertex = vertex;
+            this.parent = parent;
+        }
+    }
+
+    boolean bfs(int src , boolean[] vis , ArrayList<ArrayList<Integer>> adj){
+        Queue<pair> q = new LinkedList<>();
+        vis[src] = true;
+        q.add(new pair(src , -1));
+        while (q.size() > 0){
+            pair front = q.remove();
+            int vertex = front.vertex;
+            int parent = front.parent;
+            for (int ele : adj.get(vertex)){
+                if(!vis[ele]){
+                    q.add(new pair(ele,vertex));
+                    vis[ele] = true;
+                } else if (ele!=parent) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isCycle(int n, int[][] edges) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+        for (int i = 0; i < edges.length; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+        boolean vis[] = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            if(!vis[i]){
+                if(bfs(i,vis,adj)) return true;
+            }
+        }
+        return false;
+    }
+}
