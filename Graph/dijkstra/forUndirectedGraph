@@ -1,0 +1,45 @@
+class Solution {
+    class Pair implements Comparable<Pair>{
+        int node;
+        int dis;
+
+        public Pair(int node , int dis) {
+            this.node = node;
+            this.dis = dis;
+        }
+
+        public int compareTo(Pair p){
+            return this.dis - p.dis;
+        }
+    }
+
+    public int[] dijkstra(int n, int[][] edges, int src) {
+        int dis[] = new int[n];
+        Arrays.fill(dis,Integer.MAX_VALUE);
+        dis[src] =0;
+        List<List<Pair> > adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<Pair>());
+        }
+        for (int i = 0; i < edges.length; i++) {
+            int u = edges[i][0] , v=edges[i][1],d=edges[i][2];
+            adj.get(u).add(new Pair(v,d));
+            adj.get(v).add(new Pair(u,d));
+        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        pq.add(new Pair(src,0));
+        while (pq.size() > 0){
+            Pair top = pq.remove();
+            int node = top.node,ds = top.dis;
+            if(ds > dis[node]) continue;
+            for (Pair p : adj.get(node)){
+                int totalDis = ds + p.dis;
+                if(totalDis < dis[p.node]){
+                    dis[p.node] = totalDis;
+                    pq.add(new Pair(p.node,totalDis));
+                }
+            }
+        }
+        return dis;
+    }
+}
