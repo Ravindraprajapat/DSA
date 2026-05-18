@@ -1,0 +1,19 @@
+class Solution {
+    int paths(int[][] obstacleGrid, int[][] dp, int m, int n) {
+        if (m < 0 || n < 0)
+            return 0;
+        if (obstacleGrid[m][n] == 1)
+            return 0;
+        if(m==0 && n==0) return 1;
+        if (dp[m][n] != 0)
+            return dp[m][n];
+        return dp[m][n] = paths(obstacleGrid, dp, m - 1, n) + paths(obstacleGrid, dp, m, n - 1);
+    }
+
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int dp[][] = new int[m + 1][n + 1];
+        return paths(obstacleGrid, dp, m-1, n-1);
+    }
+}
