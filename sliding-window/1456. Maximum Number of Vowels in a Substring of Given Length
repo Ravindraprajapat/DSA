@@ -1,0 +1,26 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int n = s.length();
+        int i = 0;
+        int j = 0;
+        int maxCount = Integer.MIN_VALUE;
+        int count = 0;
+        while (j < n) {
+            int c = s.charAt(j);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                count++;
+            }
+            if (j - i + 1 == k) {
+                maxCount = Math.max(maxCount, count);
+                char l = s.charAt(i);
+                if (l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u') {
+                    count--;
+                }
+                i++;
+            }
+
+            j++;
+        }
+        return maxCount;
+    }
+}

@@ -1,0 +1,28 @@
+
+
+class Solution {
+    public int[] bellmanFord(int n, int[][] edges, int src) {
+       int[] dis = new int[n];
+       Arrays.fill(dis,100000000);
+       dis[src]=0;
+       for(int i=0;i<n-1;i++){
+           for(int j=0;j<edges.length;j++){
+               int u = edges[j][0] , v=edges[j][1] , wt = edges[j][2];
+               if( dis[u]!= 100000000 && dis[u] + wt < dis[v]){
+                   dis[v] = dis[u] + wt;
+               }
+           }
+       }
+       
+       
+       // for negative negative cycle detect 
+       for(int j=0;j<edges.length;j++){
+               int u = edges[j][0] , v=edges[j][1] , wt = edges[j][2];
+               if( dis[u]!= 100000000 && dis[u] + wt < dis[v]){
+                  return new int[]{-1};
+               }
+           }
+      
+       return dis;
+    }
+}

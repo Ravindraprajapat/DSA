@@ -1,0 +1,47 @@
+class Solution {
+    public int findChampion(int n, int[][] edges) {
+      int indegree[] = new int[n];
+        for(int i = 0; i < edges.length; i++) {
+            int v = edges[i][1];
+            indegree[v]++;
+        }
+        int camp = -1;
+        for(int i = 0; i < n; i++) {
+            if(indegree[i] == 0) {
+                if(camp != -1) {
+                    return -1;
+                }
+                camp = i;
+            }
+        }
+        return camp;
+    }
+}
+
+
+
+// class Solution {
+//     public int findChampion(int n, int[][] edges) {
+//         List<List<Integer>> adj = new ArrayList<>();
+//         int indegre[] = new int[n];
+//         for(int i=0;i<n;i++){
+//             adj.add(new ArrayList<>());
+//         }
+//         for(int i=0;i<edges.length;i++){
+//             int u = edges[i][0] , v = edges[i][1];
+//             adj.get(u).add(v);
+//             indegre[v]++;
+//         }
+        
+//         int camp = -1;
+//         for(int in : indegre){
+//             if(in==0){
+//                if(camp!=-1){
+//                 return -1;
+//                }
+//                camp = in;
+//             }
+//         }
+//        return camp;
+//     }
+// }

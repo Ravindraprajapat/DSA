@@ -1,0 +1,17 @@
+class Solution {
+    
+    int dp[];
+
+    int climb(int n){
+       if(n<=1) return 1;
+       if(dp[n]!=0) return dp[n];
+       int ans = climb(n-1) + climb(n-2);
+       dp[n] = ans;
+       return ans;
+    }
+
+    public int climbStairs(int n) {
+       dp = new int[n+1];
+       return climb(n);
+    }
+}

@@ -1,0 +1,58 @@
+class Solution {
+    class Pair {
+        int node;
+        int cost;
+
+        public Pair(int node, int cost) {
+            this.node = node;
+            this.cost = cost;
+        }
+    }
+
+    class Triplet {
+        int node;
+        int cost;
+        int stop;
+
+        public Triplet(int node, int cost, int stop) {
+            this.node = node;
+            this.cost = cost;
+            this.stop = stop;
+        }
+    }
+
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int ans[] = new int[n];
+        Arrays.fill(ans, Integer.MAX_VALUE);
+        ans[src] = 0;
+        List<List<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<Pair>());
+        }
+
+        for (int i = 0; i < flights.length; i++) {
+            int from = flights[i][0], to = flights[i][1], cost = flights[i][2];
+            adj.get(from).add(new Pair(to, cost));
+        }
+
+        Queue<Triplet> q = new LinkedList<>();
+        q.add(new Triplet(src, 0, 0));
+        while (q.size() > 0) {
+            Triplet top = q.remove();
+            int node = top.node, cost = top.cost, stop = top.stop;
+            if (stop == k + 1)
+                continue;
+            for (Pair p : adj.get(node)) {
+                int totalCost = cost + p.cost;
+                if (totalCost < ans[p.node]) {
+                    ans[p.node] = totalCost;
+                    q.add(new Triplet(p.node, totalCost, stop + 1));
+                }
+            }
+        }
+        if (ans[dst] == Integer.MAX_VALUE)
+            return -1;
+        return ans[dst];
+    }
+
+}
