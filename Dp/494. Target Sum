@@ -1,0 +1,24 @@
+
+class Solution {
+    static int absSum;
+    static int findTargetSumWays(int[] arr, int target) {
+        absSum = 0;
+        for (int ele : arr)
+            absSum += Math.abs(ele);
+        int[][] dp = new int[arr.length][2 * absSum + 1];
+        return helper(0, 0, target, arr, dp);
+    }
+    static int helper(int i, int sum, int target, int[] arr, int[][] dp) {
+        if (i == arr.length) {
+            if (sum == target)
+                return 1;
+            else
+                return 0;
+        }
+        if (dp[i][sum + absSum] != 0)
+            return dp[i][sum + absSum];
+        int add = helper(i + 1, sum + arr[i], target, arr, dp);
+        int subtract = helper(i + 1, sum - arr[i], target, arr, dp);
+        return dp[i][sum + absSum] = add + subtract;
+    }
+}
