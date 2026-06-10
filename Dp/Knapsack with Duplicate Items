@@ -1,0 +1,21 @@
+class Solution {
+	
+	public int helper(int i, int val[], int wt[], int capacity, int [][] dp) {
+		if (i >= val.length)
+			return 0;
+		if (dp[i][capacity] != 0)
+			return dp[i][capacity];
+		
+		int skip = helper(i+1, val, wt, capacity , dp);
+		if (capacity < wt[i])
+			return dp[i][capacity] = skip;
+		int pick = val[i] + helper(i, val, wt, capacity - wt[i], dp);
+		return dp[i][capacity] = Math.max(pick, skip);
+	}
+	
+	public int knapSack(int val[], int wt[], int capacity) {
+		int n = val.length;
+		int [][] dp = new int[n][capacity+1];
+		return helper(0, val, wt, capacity, dp);
+	}
+}
