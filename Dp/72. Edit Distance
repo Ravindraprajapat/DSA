@@ -1,0 +1,27 @@
+class Solution {
+    int edit(int i, int j, String a, String b, int[][] dp) {
+
+        if (i < 0)
+            return j + 1;
+        if (j < 0)
+            return i + 1;
+        if (dp[i][j] != -1)
+            return dp[i][j];
+        if (a.charAt(i) == b.charAt(j))
+            return dp[i][j] = edit(i - 1, j - 1, a, b, dp);
+        int insert = edit(i, j - 1, a, b, dp) + 1;
+        int delete = edit(i - 1, j, a, b, dp) + 1;
+        int replace = edit(i - 1, j - 1, a, b, dp) + 1;
+        return dp[i][j] = Math.min(insert, Math.min(delete, replace));
+    }
+
+    public int minDistance(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+        int[][] dp = new int[n][m];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+        return edit(n - 1, m - 1, s1, s2, dp);
+    }
+}
